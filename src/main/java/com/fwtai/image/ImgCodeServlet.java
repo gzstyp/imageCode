@@ -8,10 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import java.awt.Graphics;
-import java.awt.Color;
-import java.awt.Font;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -28,7 +25,9 @@ import java.util.Random;
 */
 public final class ImgCodeServlet extends HttpServlet implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private final String chars =  "qwertyuioplkjhgfdsazxcvbnmMNBVCXZASDFGHJKLPOIUYTREWQ0123456789";
+
+    private static final long serialVersionUID = 1L;
 	/**图片的宽度*/
 	private final static short WIDTH = 120;
 	/**图片的高度*/
@@ -94,7 +93,6 @@ public final class ImgCodeServlet extends HttpServlet implements Serializable {
 
 	/**固定生成5个图形验证码*/
 	protected final String rand(final int length){
-		final String chars = "qwertyuioplkjhgfdsazxcvbnmMNBVCXZASDFGHJKLPOIUYTREWQ0123456789";
 		final String image = RandomStringUtils.random(length < 5 ? LENGTH : length,chars);
 		return image.replaceAll("0","W").replaceAll("o","R").replaceAll("O","p").replaceAll("1","T").replaceAll("l","7");
 	}
@@ -102,7 +100,6 @@ public final class ImgCodeServlet extends HttpServlet implements Serializable {
 	/**随机生成5或4个图形验证码*/
 	protected final String rand(){
 		final int length = new Random().nextInt(6) < 4 ? 5 : 4;
-		final String chars = "qwertyuioplkjhgfdsazxcvbnmMNBVCXZASDFGHJKLPOIUYTREWQ0123456789";
 		final String image = RandomStringUtils.random(length,chars);
 		return image.replaceAll("0","W").replaceAll("o","R").replaceAll("O","p").replaceAll("1","T").replaceAll("l","7");
 	}
