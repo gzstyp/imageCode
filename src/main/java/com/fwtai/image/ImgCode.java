@@ -6,9 +6,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.awt.Graphics;
-import java.awt.Color;
-import java.awt.Font;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -25,7 +23,6 @@ import java.util.Random;
 */
 public final class ImgCode extends HttpServlet implements Serializable {
 
-	private final long serialVersionUID = 1L;
 	/**图片的宽度*/
 	private final static short WIDTH = 122;
 	/**图片的高度*/

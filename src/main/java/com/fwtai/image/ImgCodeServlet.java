@@ -1,7 +1,5 @@
 package com.fwtai.image;
 
-import org.apache.commons.lang3.RandomStringUtils;
-
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;
@@ -92,16 +90,21 @@ public final class ImgCodeServlet extends HttpServlet implements Serializable {
 	}
 
 	/**固定生成5个图形验证码*/
-	protected final String rand(final int length){
-		final String image = RandomStringUtils.random(length < 5 ? LENGTH : length,chars);
-		return image.replaceAll("0","W").replaceAll("o","R").replaceAll("O","p").replaceAll("1","T").replaceAll("l","7");
+	protected final String rand(int length){
+        length = length < 5 ? LENGTH : length;
+        final Random random = new Random();
+        final StringBuilder sb = new StringBuilder();
+        for(int i=0;i<length;i++){
+            final int number = random.nextInt(62);
+            sb.append(chars.charAt(number));
+        }
+		return sb.toString().replaceAll("0","W").replaceAll("o","R").replaceAll("O","p").replaceAll("1","T").replaceAll("l","7");
 	}
 	
 	/**随机生成5或4个图形验证码*/
 	protected final String rand(){
 		final int length = new Random().nextInt(6) < 4 ? 5 : 4;
-		final String image = RandomStringUtils.random(length,chars);
-		return image.replaceAll("0","W").replaceAll("o","R").replaceAll("O","p").replaceAll("1","T").replaceAll("l","7");
+        return rand(length);
 	}
 
 	@Override
